@@ -1,0 +1,11 @@
+name: test-fe
+on: push
+jobs:
+  first-job:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: test frontend
+        run: |
+          cd ./FE
+          npm install
+          npm run test

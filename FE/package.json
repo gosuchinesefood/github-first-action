@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --no-watch",
+    "test:listening": "ng test",
     "serve:ssr:FE": "node dist/FE/server/server.mjs"
   },
   "private": true,
