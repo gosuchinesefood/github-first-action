@@ -6,6 +6,7 @@ jobs:
     steps:
       - name: test frontend
         run: |
+          pwd
           cd ./FE
           npm install
           npm run test
