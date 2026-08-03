@@ -5,11 +5,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: test frontend
         working-directory: ./FE
         run: |
           echo $(pwd)
+          echo $(ls)
           npm install
           npm run test
