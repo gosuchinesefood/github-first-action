@@ -4,6 +4,9 @@ jobs:
   first-job:
     runs-on: ubuntu-24.04
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: test frontend
         working-directory: ./FE
         run: |
