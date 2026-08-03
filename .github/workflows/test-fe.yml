@@ -10,6 +10,6 @@ jobs:
       - name: test frontend
         working-directory: ./FE
         run: |
-          pwd
+          echo pwd
           npm install
           npm run test
