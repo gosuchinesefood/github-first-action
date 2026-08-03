@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: test frontend
+        working-directory: ./FE
         run: |
-          echo pwd
-          cd ./FE
+          pwd
           npm install
           npm run test
