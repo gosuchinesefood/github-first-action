@@ -18,15 +18,19 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: ./FE/package-lock.json
 
-      - name: test frontend
+      - name: Install dependencies
         working-directory: ./FE
         run: |
           echo $(node -v)
           echo $(pwd)
           echo $(ls)
           npm ci
-          npm run test
+      - name: test frontend
+        working-directory: ./FE
+        run: npm run test
   build:
     needs: test
     runs-on: ubuntu-24.04
@@ -37,6 +41,8 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: ./FE/package-lock.json
       - name: Build project
         run: |
           echo $(pwd)
