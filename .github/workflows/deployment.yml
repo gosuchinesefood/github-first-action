@@ -51,3 +51,13 @@ jobs:
         with:
           name: fe-dist
           path: ./FE/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: fe-dist
+      - name: Deploy
+        run: echo "Fake Deploy"
