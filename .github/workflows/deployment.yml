@@ -60,4 +60,7 @@ jobs:
         with:
           name: fe-dist
       - name: Deploy
-        run: echo "Fake Deploy"
+        run: |
+          echo $(pwd)
+          echo $(ls)
+          echo "Fake Deploy"
