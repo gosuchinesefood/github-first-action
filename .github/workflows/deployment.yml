@@ -9,7 +9,6 @@ on:
 
 env:
   NODE_VERSION: '24'
-  RANDOM_THING: vmi
 jobs:
   test:
     runs-on: ubuntu-24.04
@@ -74,4 +73,5 @@ jobs:
           echo $(ls)
           echo $NODE_VERSION
           echo "$NODE_VERSION"
+          echo ${{ secrets.RANDOM_THING }}
           env
