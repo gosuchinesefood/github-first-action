@@ -72,7 +72,6 @@ jobs:
         run: |
           echo $(pwd)
           echo $(ls)
-          echo "$NODE_VERSION
+          echo $NODE_VERSION
           echo "$NODE_VERSION"
-          echo $(NODE_VERSION)
-          echo ${{ env }}
+          env
