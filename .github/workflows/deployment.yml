@@ -7,6 +7,9 @@ on:
        - synchronize
        - reopened
 
+env:
+  NODE_VERSION: '24'
+  RANDOM_THING: vmi
 jobs:
   test:
     runs-on: ubuntu-24.04
@@ -17,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24'
+          node-version: $NODE_VERSION
           cache: 'npm'
           cache-dependency-path: ./FE/package-lock.json
 
@@ -40,7 +43,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
-          node-version: '24'
+          node-version: $NODE_VERSION
           cache: 'npm'
           cache-dependency-path: ./FE/package-lock.json
       - name: Build project
@@ -69,4 +72,6 @@ jobs:
         run: |
           echo $(pwd)
           echo $(ls)
-          echo "Fake Deploy"
+          echo "$NODE_VERSION
+          echo "$NODE_VERSION"
+          echo $(NODE_VERSION)
