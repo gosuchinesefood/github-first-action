@@ -4,7 +4,11 @@ on:
   pull_request:
      types:
        - opened
+       - synchronize
+       - reopened
 
+env:
+  NODE_VERSION: '24'
 jobs:
   test:
     runs-on: ubuntu-24.04
@@ -15,17 +19,21 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ./FE/package-lock.json
 
-      - name: test frontend
+      - name: Install dependencies
         working-directory: ./FE
         run: |
           echo $(node -v)
           echo $(pwd)
           echo $(ls)
           npm ci
-          npm run test
-  deploy:
+      - name: test frontend
+        working-directory: ./FE
+        run: npm run test
+  build:
     needs: test
     runs-on: ubuntu-24.04
     steps:
@@ -34,7 +42,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
-          node-version: '24'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ./FE/package-lock.json
       - name: Build project
         run: |
           echo $(pwd)
@@ -44,3 +54,24 @@ jobs:
           echo $(ls)
           npm ci
           npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: fe-dist
+          path: ./FE/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: fe-dist
+      - name: Deploy
+        run: |
+          echo $(pwd)
+          echo $(ls)
+          echo $NODE_VERSION
+          echo "$NODE_VERSION"
+          echo ${{ secrets.RANDOM_THING }}
+          env
